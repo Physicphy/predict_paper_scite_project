@@ -16,9 +16,9 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from paper_app.routes import (main_route, user_route)
+    from paper_app.routes import (main_route, model_route)
     app.register_blueprint(main_route.bp)
-    app.register_blueprint(user_route.bp, url_prefix='/api')
+    app.register_blueprint(model_route.bp, url_prefix='/api')
 
     return app
 

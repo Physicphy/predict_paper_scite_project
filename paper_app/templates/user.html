@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block title %}
-User Index
+Model Index
 {% endblock %}
 
 {% block lead %}
-유저들을 조회, 추가, 및 삭제하는 페이지입니다.
+학습시킨 모델을 조회, 추가, 및 삭제하는 페이지입니다.
 {% endblock %}
 
 {% block main_body %}
 <form method="POST" action="/api/model">
-  <input name="username" style="margin-bottom:10px" class="form-control" type="text" placeholder="Enter user">
+  <input name="model_name" style="margin-bottom:10px" class="form-control" type="text" placeholder="Enter model name">
   <input type="submit" class="btn btn-primary" value="Add" />
 </form>
 

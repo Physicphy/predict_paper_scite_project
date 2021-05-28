@@ -1,4 +1,4 @@
-from twit_app.services.embedding_api import en
+from paper_app.services.embedding_api import en
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier as rfc
 
