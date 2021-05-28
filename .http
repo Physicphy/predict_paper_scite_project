@@ -1,0 +1,45 @@
+@baseUrl =  http://127.0.0.1:5000/
+
+### db에 user와 tweet 추가
+POST {{baseUrl}}/api/user
+Content-Type: application/json
+
+{
+    "username":"physicphy"
+}
+### db에 user와 tweet 추가
+POST {{baseUrl}}/api/user
+Content-Type: application/json
+
+{
+    "username":"StorynGame"
+}
+
+### db에 user와 tweet 추가
+POST {{baseUrl}}/api/user
+Content-Type: application/json
+
+{
+    "username":"JonathanMTweet"
+}
+
+### db에 있는 user 둘을 골라서, 주어진 문장을 말했을 법한 사람을 고르기
+POST {{baseUrl}}/compare
+Content-Type: application/json
+
+{
+    "user_1":"StorynGame",
+    "user_2":"physicphy",
+    "compare_text":"아주 오래전, 여러분 조상들은 녹음이 무성한 어느 대륙의 해안에서 큰 산맥 사이 계곡을 덮고 있던, 저지대의 어느 젊은 숲 근처에 마을을 세웠습니다."
+}
+
+### db에서 user_id로 user 제거
+@user_id = 3167655786
+GET {{baseUrl}}/api/user/{{user_id}}
+
+###
+GET {{baseUrl}}/api/user/1
+###
+GET {{baseUrl}}/api/user/2
+###
+GET {{baseUrl}}/api/user/3

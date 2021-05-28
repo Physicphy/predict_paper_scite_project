@@ -1,0 +1,1 @@
+web: gunicorn --workers=2 'paper_app:create_app()'
