@@ -11,5 +11,5 @@ with open(file_name, 'rb') as f:
 # %%
 loaded_model['X']
 # %%
-loaded_model['submit']
+loaded_model['submit']['X'][1756]
 # %%
