@@ -22,7 +22,7 @@ def get_paper(keyword,key,value,start_date=None,end_date=None):
     if start_date is None or end_date is None:
         end_url = f"{key_map[key]}:{value}&start=0&max_results=1000"
     else:
-        end_url = f"{key_map[key]}:{value}+AND+submittedDate:[{start_date}+TO+{end_date}]&start=0&max_results=1000"
+        end_url = f"{key_map[key]}:{value}+AND+submittedDate:[{start_date}+TO+{end_date}]&start=0&max_results=10"
     response = requests.get(base_url+end_url)
     soup = BeautifulSoup(response.content, 'html.parser')
     paper_list = soup.select('entry')
