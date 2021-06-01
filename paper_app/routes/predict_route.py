@@ -91,8 +91,9 @@ def make_prediction(result_name=None):
             )
         mfm.add_prediction_to_db(result_name_,result_pickle,model_row.id)
         # result_dict_list = mfm.transform_predict_result_to_dict_list(raw_df,predict_result)
-
-    return redirect(url_for('main.prediction_index',msg_code=0))
+        return redirect(url_for('main.prediction_index',msg_code=0))
+    else:
+        return redirect(url_for('main.prediction_index',msg_code=1))
 
 @bp.route('/model')
 @bp.route('/model/<model_name>')
