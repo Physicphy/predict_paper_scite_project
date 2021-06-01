@@ -53,7 +53,7 @@ def make_prediction(result_name=None):
 
     model_row = mfm.get_model_from_db(request_data['model_name'])
     
-    if model_row is not None:
+    if model_row and model_row is not None:
         model = mfm.load_from_pickle(model_row.model_pickle)
     else:
         return redirect(url_for('main.prediction_index',msg_code=1))
@@ -63,27 +63,28 @@ def make_prediction(result_name=None):
     raw_p_dict_list = []
     select_p_dict_list = []
     emb_dict_list = []
-    for p_dict in test_p_dict_list:
-        new_p_dict ={}
-        check_category = mfd.check_and_add_category(p_dict['category'])
-        new_p_dict['category'] = check_category.id
-        p_dict['category'] = check_category.full_name
-        emb_dict = mfm.add_embedded_dict(p_dict,'title')
-        select_p_dict_list.append(new_p_dict)
-        emb_dict_list.append(emb_dict)
-        raw_p_dict_list.append(p_dict)
+    if test_p_dict_list:
+        for p_dict in test_p_dict_list:
+            new_p_dict ={}
+            check_category = mfd.check_and_add_category(p_dict['category'])
+            new_p_dict['category'] = check_category.id
+            p_dict['category'] = check_category.full_name
+            emb_dict = mfm.add_embedded_dict(p_dict,'title')
+            select_p_dict_list.append(new_p_dict)
+            emb_dict_list.append(emb_dict)
+            raw_p_dict_list.append(p_dict)
     
-    test_df = mfm.make_df([select_p_dict_list,emb_dict_list])
-    predict_result = mfm.make_prediction(model,test_df)
-
-    raw_df = mfm.make_df([raw_p_dict_list])
-    raw_df['scites'] = predict_result
-    raw_df.sort_values(by='scites',axis=0,ascending=False,inplace=True)
-    result_pickle = mfm.transform_to_pickle(raw_df)
-
-    result_name_ = request_data['model_name']+'_'+datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
-    mfm.add_prediction_to_db(result_name_,result_pickle,model_row.id)
-    # result_dict_list = mfm.transform_predict_result_to_dict_list(raw_df,predict_result)
+        test_df = mfm.make_df([select_p_dict_list,emb_dict_list])
+        predict_result = mfm.make_prediction(model,test_df)
+    
+        raw_df = mfm.make_df([raw_p_dict_list])
+        raw_df['scites'] = predict_result
+        raw_df.sort_values(by='scites',axis=0,ascending=False,inplace=True)
+        result_pickle = mfm.transform_to_pickle(raw_df)
+    
+        result_name_ = request_data['model_name']+'_'+datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+        mfm.add_prediction_to_db(result_name_,result_pickle,model_row.id)
+        # result_dict_list = mfm.transform_predict_result_to_dict_list(raw_df,predict_result)
 
     return redirect(url_for('main.prediction_index',msg_code=0))
 

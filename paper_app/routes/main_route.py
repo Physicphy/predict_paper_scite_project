@@ -36,20 +36,21 @@ def paper_index():
     # DB에서 현재 논문들 리스트를 불러와 출력
     raw_paper_list = mfd.get_paper_from_db()
     paper_list =[] 
-    for p in raw_paper_list:
-        author_list = [p_a.one_author.name for p_a in p.many_paper_authors]
-        keyword_list = [p_w.one_keyword.word for p_w in p.many_paper_keywords]
-        paper_list.append({
-            "id":p.id,
-            "title":p.title,
-            "category":p.one_category.full_name,
-            "author":author_list,
-            "keyword":keyword_list,
-            "scites":p.scites,
-            "link_end":p.link_end,
-            "published_date":p.published_date,
-            "abstract":p.abstract
-            })
+    if raw_paper_list:
+        for p in raw_paper_list:
+            author_list = [p_a.one_author.name for p_a in p.many_paper_authors]
+            keyword_list = [p_w.one_keyword.word for p_w in p.many_paper_keywords]
+            paper_list.append({
+                "id":p.id,
+                "title":p.title,
+                "category":p.one_category.full_name,
+                "author":author_list,
+                "keyword":keyword_list,
+                "scites":p.scites,
+                "link_end":p.link_end,
+                "published_date":p.published_date,
+                "abstract":p.abstract
+                })
     
     key_list = [
         {'k':'Identifier','v':'link_end'},
@@ -74,7 +75,7 @@ def prediction_index():
     result_list = []
     prediction_dict_list = []
 
-    if result_row is not None:
+    if result_row and result_row is not None:
         result_list = [{"id":result.id,"result_name":result.result_name} for result in result_row]
         result_df = mfm.load_from_pickle(result_row[0].result_pickle)
         prediction_dict_list = mfm.transform_predict_result_to_dict_list(result_df)
@@ -82,7 +83,7 @@ def prediction_index():
     model_row = mfm.get_model_from_db()
     model_list = []
 
-    if model_row is not None:
+    if model_row and model_row is not None:
         model_list = [{"id":model.id,"model_name":model.model_name} for model in model_row]
 
     key_list = [
@@ -111,7 +112,7 @@ def prediction_loaded_index(result_name=None):
     result_list = []
     prediction_dict_list = []
 
-    if result_row is not None:
+    if result_row and result_row is not None:
         result_list = [{"id":result.id,"result_name":result.result_name} for result in result_row]
         if result_name is not None:
             result_select = mfm.get_result_from_db(result_name=result_name)
