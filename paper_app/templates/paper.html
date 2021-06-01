@@ -27,7 +27,7 @@ Paper Add/Delete/Update
     <span class="input-group-text">Key / Value</span>
     <select name="key" class="form-control" id="exampleFormControlSelect1">
       {% for key in key_list %}
-      <option value={{key.v}}>{{key.k}}</option>
+      <option value="{{key.v}}">{{key.k}}</option>
       {% endfor %}
     </select>
     <input name="value" type="text" aria-label="end_date" class="form-control" placeholder="Enter search value">

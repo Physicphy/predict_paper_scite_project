@@ -28,7 +28,7 @@ DB에 저장된 예측 값을 불러옵니다.
 </style>
 <form method="POST" action="/api/prediction">
   <div class="form-group">
-    <label> Prediction result (Model name & Created datetime)</label>
+    <label> Prediction result ([Model name]_key:value_@Created datetime)</label>
     <select name="result_name" class="form-control" onchange="location = this.value;" id="exampleFormControlSelect1">
       {% for result in result_list %}
       <option value='/prediction_loaded/{{result.result_name}}'>{{result.result_name}}</option>

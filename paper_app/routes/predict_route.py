@@ -18,24 +18,25 @@ def make_model():
     else:
         all_paper = mfd.get_paper_filter_by_keyword(request_data['keyword'])
     
-    p_dict_list =[]
-    emb_dict_list =[]
-    for p in all_paper:
-        p_dict = {}
-        # p_dict['id']=p.id
-        p_dict['title']=p.title
-        # p_dict['abstract']=p.abstract
-        p_dict['category']=p.category_id
-        p_dict['scites']=p.scites
-        emb_dict = mfm.add_embedded_dict(p_dict,'title')
-        p_dict.pop('title')
-        p_dict_list.append(p_dict)
-        emb_dict_list.append(emb_dict)
-
-    train_df = mfm.make_df([p_dict_list,emb_dict_list])
-    model = mfm.make_model(train_df,'scites')
-    model_pickle = mfm.transform_to_pickle(model)
-    mfm.add_model_to_db(request_data['model_name'],model_pickle)
+    if all_paper:
+        p_dict_list =[]
+        emb_dict_list =[]
+        for p in all_paper:
+            p_dict = {}
+            # p_dict['id']=p.id
+            p_dict['title']=p.title
+            # p_dict['abstract']=p.abstract
+            p_dict['category']=p.category_id
+            p_dict['scites']=p.scites
+            emb_dict = mfm.add_embedded_dict(p_dict,'title')
+            p_dict.pop('title')
+            p_dict_list.append(p_dict)
+            emb_dict_list.append(emb_dict)
+    
+        train_df = mfm.make_df([p_dict_list,emb_dict_list])
+        model = mfm.make_model(train_df,'scites')
+        model_pickle = mfm.transform_to_pickle(model)
+        mfm.add_model_to_db(request_data['model_name'],model_pickle)
     
     return redirect(url_for('main.model_index',msg_code=0))
 
@@ -82,7 +83,7 @@ def make_prediction(result_name=None):
         raw_df.sort_values(by='scites',axis=0,ascending=False,inplace=True)
         result_pickle = mfm.transform_to_pickle(raw_df)
     
-        result_name_ = "{}_{}:{}_{}".format(
+        result_name_ = "[{}]_{}:{}_@{}".format(
             request_data['model_name'],
             request_data['key'],
             request_data['value'],

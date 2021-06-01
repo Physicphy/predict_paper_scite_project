@@ -21,7 +21,8 @@ def model_index():
     
     # DB에서 현재 키워드 리스트를 불러와 출력
     raw_keyword_list = mfd.get_keyword_from_db()
-    keyword_list = [{'id':-1,'word':'---'}]+[{'id':keyword.id,'word':keyword.word} for keyword in raw_keyword_list]
+    #keyword_list = [{'id':-1,'word':'---'}]+[{'id':keyword.id,'word':keyword.word} for keyword in raw_keyword_list]
+    keyword_list = ['---']+[keyword.word for keyword in raw_keyword_list]
 
     # predict_route에서 온 msg_code 확인
     msg_code = request.args.get('msg_code', None)
