@@ -5,9 +5,9 @@ class Paper(db.Model):
     __tablename__ = 'paper'
     
     id = db.Column(db.Integer(),primary_key=True)
-    title = db.Column(db.String(128),nullable=False)
+    title = db.Column(db.String(256),nullable=False)
     abstract = db.Column(db.Text(),nullable=False)
-    link_end = db.Column(db.String(16),nullable=False,unique=True)
+    link_end = db.Column(db.String(32),nullable=False,unique=True)
     published_date = db.Column(db.Date(),nullable=False)
     # title_embedded = db.Column(db.PickleType(),nullable=False)
     # abstract_embedded = db.Column(db.PickleType(),nullable=False)

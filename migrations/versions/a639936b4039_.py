@@ -46,7 +46,7 @@ def upgrade():
     )
     op.create_table('paper',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=128), nullable=False),
+    sa.Column('title', sa.String(length=256), nullable=False),
     sa.Column('abstract', sa.Text(), nullable=False),
     sa.Column('link_end', sa.String(length=16), nullable=False),
     sa.Column('published_date', sa.Date(), nullable=False),

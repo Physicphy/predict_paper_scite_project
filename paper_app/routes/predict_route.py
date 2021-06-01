@@ -82,7 +82,12 @@ def make_prediction(result_name=None):
         raw_df.sort_values(by='scites',axis=0,ascending=False,inplace=True)
         result_pickle = mfm.transform_to_pickle(raw_df)
     
-        result_name_ = request_data['model_name']+'_'+datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+        result_name_ = "{}_{}:{}_{}".format(
+            request_data['model_name'],
+            request_data['key'],
+            request_data['value'],
+            datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+            )
         mfm.add_prediction_to_db(result_name_,result_pickle,model_row.id)
         # result_dict_list = mfm.transform_predict_result_to_dict_list(raw_df,predict_result)
 
