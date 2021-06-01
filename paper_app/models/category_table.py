@@ -4,7 +4,7 @@ class Category(db.Model):
     __tablename__ = 'category'
     
     id = db.Column(db.Integer(),primary_key=True)
-    full_name = db.Column(db.String(64),nullable=False,unique=True)
+    full_name = db.Column(db.String(128),nullable=False,unique=True)
     short_name = db.Column(db.String(16),nullable=False,unique=True)
     many_papers = db.relationship('Paper',back_populates='one_category',cascade='all, delete')
 
