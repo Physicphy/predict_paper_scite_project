@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block alert %}
+{% if alert_msg %}
+<div class="alert alert-{{ alert_msg.type }}" role="alert">
+  {{ alert_msg.msg }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block title %}
+Prediction of Scites
+{% endblock %}
+
+{% block lead %}
+어제, 오늘자 논문들의 예측 인용수를 보여줍니다.
+{% endblock %}
+
+{% block main_body %}
+<style>
+  .scites {
+    color: blue;
+    font-weight: bold;
+  }
+  .input-group{
+    margin-block-end:10px;
+  }
+</style>
+<form method="POST" action="/api/prediction">
+  <div class="input-group">
+    <span class="input-group-text">Key / Value</span>
+    <select name="key" class="form-control" id="exampleFormControlSelect1">
+      {% for key in key_list %}
+      <option value={{key.v}}>{{key.k}}</option>
+      {% endfor %}
+    </select>
+    <input name="value" type="text" aria-label="end_date" class="form-control" placeholder="Enter search value">
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-text">Select Model</span>
+    <select name="model_name" class="form-control" id="exampleFormControlSelect1">
+      {% for model in model_list %}
+      <option value={{model.model_name}}>{{model.model_name}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" class="btn btn-primary" value="Predict" />
+  </div> 
+</form>
+
+
+{% if prediction_list %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Identifier</th>
+      <th scope="col">Title/</br>Abstract </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col">Category</th>
+      <th scope="col">Published</th>
+      <th scope="col">Scites/</br>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paper in prediction_list %}
+    <tr>
+      <th scope="row">{{ paper.link_end}}</th>
+      <td colspan="3" style="font-weight:bold">{{ paper.title }}</td>
+      <td>{{ paper.category }}</td>
+      <td> {{paper.published_date}} </td>
+      <td class="scites">{{ paper.scites }}</td>
+    </tr>
+    <tr>
+      <td colspan="5"> {{paper.abstract}} </td>
+      <td colspan="2">
+        {% for author in paper.author_list %}
+        - {{author}}</br>
+        {% endfor %} 
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

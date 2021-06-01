@@ -18,15 +18,41 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/model">Model</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/paper">Paper</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/prediction">Prediction</a>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Paper
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/paper">Add/Delete Paper</a></li>
+              <li><a class="dropdown-item" href="/paper_loaded">Load Paper</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/model">Create a Training Model</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/compare">Predict</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Prediction
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/prediction">Create new Prediction</a></li>
+              <li><a class="dropdown-item" href="/prediction_loaded">Load Prediction result</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/model">Create a Training Model</a></li>
+            </ul>
           </li>
         </ul>
       </div>
     </nav>
+    
 
     {% block alert %}
     {% endblock %}

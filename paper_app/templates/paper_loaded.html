@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block alert %}
+{% if alert_msg %}
+<div class="alert alert-{{ alert_msg.type }}" role="alert">
+  {{ alert_msg.msg }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block title %}
+Paper Index
+{% endblock %}
+
+{% block lead %}
+수집해둔 논문 정보를 조회/삭제하는 페이지입니다.
+{% endblock %}
+
+{% block main_body %}
+<style>
+  .input-group{
+    margin-block-end:10px;
+  }
+</style>
+<form method="POST" action="/api/paper_loaded">
+  <div class="input-group">
+    <span class="input-group-text">Key / Value</span>
+    <select name="key" class="form-control" id="exampleFormControlSelect1">
+      {% for key in key_list %}
+      <option value={{key.v}}>{{key.k}}</option>
+      {% endfor %}
+    </select>
+    <input name="value" type="text" aria-label="value" class="form-control" placeholder="Enter search value">
+    <!-- <input name="keyword" type="text" aria-label="end_date" class="form-control" placeholder="Enter paper's keyword">
+    <span class="input-group-text">Keyword</span> -->
+    <input type="submit" class="btn btn-primary" value="Load" />
+  </div>
+  <!-- <div class="input-group">
+    <span class="input-group-text">Start Date / End Date</span>
+    <input name="start_date" type="text" aria-label="start_date" class="form-control">
+    <input name="end_date" type="text" aria-label="end_date" class="form-control">
+    <input type="submit" class="btn btn-primary" value="Load" />
+  </div> -->
+  
+</form>
+
+{% if paper_list %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Identifier/</br>Keyword</th>
+      <th scope="col">Title/</br>Abstract </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col">Category</th>
+      <th scope="col">Published</th>
+      <th scope="col">Scites/</br>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paper in paper_list %}
+    <tr>
+      <th scope="row">{{ paper.link_end}}</th>
+      <td colspan="3" style="font-weight:bold">{{ paper.title }}</td>
+      <td>{{ paper.category }}</td>
+      <td> {{paper.published_date}} </td>
+      <td style="font-weight:bold">{{ paper.scites }}</td>
+      <td>
+        <a class="btn btn-secondary", href='/api/paper_loaded/{{ paper.link_end }}'>
+          Delete
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {% for keyword in paper.keyword %}
+        [{{keyword}}]</br>
+        {% endfor %}
+      </td>
+      <td colspan="5"> {{paper.abstract}} </td>
+      <td colspan="2">
+        {% for author in paper.author %}
+        - {{author}}</br>
+        {% endfor %} 
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
