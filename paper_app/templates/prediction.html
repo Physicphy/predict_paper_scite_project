@@ -32,7 +32,7 @@ Create Prediction of Scites
 </style>
 <form method="POST" action="/api/prediction">
   <div class="input-group">
-    <span class="input-group-text">Key / Value</span>
+    <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Key / Value</span>
     <select name="key" class="form-control" id="exampleFormControlSelect1">
       {% for key in key_list %}
       <option value="{{key.v}}">{{key.k}}</option>
@@ -42,7 +42,7 @@ Create Prediction of Scites
   </div>
 
   <div class="input-group">
-    <span class="input-group-text">Select Model</span>
+    <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Select Model</span>
     <select name="model_name" class="form-control" id="exampleFormControlSelect1">
       {% for model in model_list %}
       <option value="{{model.model_name}}">{{model.model_name}}</option>

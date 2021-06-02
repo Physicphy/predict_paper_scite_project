@@ -28,7 +28,7 @@ Paper in DB
 </style>
 <form method="POST" action="/api/paper_loaded">
   <div class="input-group">
-    <span class="input-group-text">Key / Value</span>
+    <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Key / Value</span>
     <select name="key" class="form-control" id="exampleFormControlSelect1">
       {% for key in key_list %}
       <option value="{{key.v}}">{{key.k}}</option>
