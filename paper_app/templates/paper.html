@@ -28,7 +28,7 @@ Paper Add/Delete/Update
 </style>
 <form method="POST" action="/api/paper">
   <div class="input-group">
-    <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Key / Value</span>
+    <span class="input-group-text" style="width:180px;color:white;background-color: rgb(65, 65, 65); border:none;">Key / Value</span>
     <select name="key" class="form-control" id="exampleFormControlSelect1">
       {% for key in key_list %}
       <option value="{{key.v}}">{{key.k}}</option>
@@ -39,10 +39,10 @@ Paper Add/Delete/Update
     <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Keyword</span>
   </div>
   <div class="input-group">
-    <span class="input-group-text" style="width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Start Date / End Date</span>
+    <span class="input-group-text" style="width:180px;color:white;background-color: rgb(65, 65, 65); border:none;">Start Date / End Date</span>
     <input name="start_date" type="text" aria-label="start_date" class="form-control">
     <input name="end_date" type="text" aria-label="end_date" class="form-control">
-    <input type="submit" class="btn btn-primary" style="background-color: maroon; border:none;" value="Add" />
+    <input type="submit" class="btn btn-primary" style="width:120px;background-color: maroon; border:none;" value="Add" />
   </div>  
 </form>
 
