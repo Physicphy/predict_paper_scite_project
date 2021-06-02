@@ -21,6 +21,10 @@ Paper Add/Delete/Update
   .input-group{
     margin-block-end:10px;
   }
+  body {
+    background-image: url('https://cdn.pixabay.com/photo/2019/11/19/22/24/watch-4638673_960_720.jpg');
+    background-size: 100%;
+  }
 </style>
 <form method="POST" action="/api/paper">
   <div class="input-group">
@@ -38,21 +42,21 @@ Paper Add/Delete/Update
     <span class="input-group-text">Start Date / End Date</span>
     <input name="start_date" type="text" aria-label="start_date" class="form-control">
     <input name="end_date" type="text" aria-label="end_date" class="form-control">
-    <input type="submit" class="btn btn-primary" value="Add" />
+    <input type="submit" class="btn btn-primary" style="background-color: maroon; border:none;" value="Add" />
   </div>  
 </form>
 
 {% if paper_list %}
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" style="color: white;">
   <thead>
     <tr>
-      <th scope="col">Identifier/</br>Keyword</th>
-      <th scope="col">Title/</br>Abstract </th>
-      <th scope="col"> </th>
-      <th scope="col"> </th>
-      <th scope="col">Category</th>
-      <th scope="col">Published</th>
-      <th scope="col">Scites/</br>Author</th>
+      <th>Identifier/</br>Keyword</th>
+      <th colspan="3">Title/</br>Abstract </th>
+      <!-- <th scope="col"> </th>
+      <th scope="col"> </th> -->
+      <th>Category</th>
+      <th>Published</th>
+      <th>Scites/</br>Author</th>
     </tr>
   </thead>
   <tbody>

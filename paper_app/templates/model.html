@@ -17,6 +17,12 @@ Model Index
 {% endblock %}
 
 {% block main_body %}
+<style>
+  body {
+    background-image: url('https://cdn.pixabay.com/photo/2019/11/19/22/24/watch-4638673_960_720.jpg');
+    background-size: 100%;
+  }
+</style>
 <form method="POST" action="/api/model">        
   <div class="form-group">
     <label>Keyword</label>
@@ -27,15 +33,16 @@ Model Index
     </select>
   </div>
   <input name="model_name" style="margin-bottom:10px" class="form-control" type="text" placeholder="Enter model name">
-  <input type="submit" class="btn btn-primary" value="Make Model" />
+  <input type="submit" class="btn btn-primary" style="background-color: maroon; border:none;" value="Make Model" />
 </form>
 
 {% if model_list %}
-<table class="table">
+<table class="table" style="color: white;">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
+      <th> </th>
     </tr>
   </thead>
   <tbody>
