@@ -22,19 +22,26 @@ Model Index
     background-image: url('https://cdn.pixabay.com/photo/2019/11/19/22/24/watch-4638673_960_720.jpg');
     background-size: 100%;
   }
+  .input-group{
+    margin-block-end:10px;
+  }
 </style>
 <form method="POST" action="/api/model">        
-  <div class="form-group">
-    <label>Keyword</label>
+  <div class="input-group">
+    <span class="input-group-text" style="display: inline-block; text-align:center; width:120px;color:white;background-color: rgb(65, 65, 65); border:none;">Keyword</span>
     <select name="keyword" class="form-control" id="exampleFormControlSelect1">
       {% for keyword in keyword_list %}
       <option value="{{keyword}}">{{keyword}}</option>
       {% endfor %}
     </select>
   </div>
-  <input name="model_name" style="margin-bottom:10px" class="form-control" type="text" placeholder="Enter model name">
-  <input type="submit" class="btn btn-primary" style="background-color: maroon; border:none;" value="Make Model" />
+  <div class="input-group">
+    <span class="input-group-text" style="display:inline-block; text-align:center; width:120px; height: 40px; color:white;background-color: rgb(65, 65, 65); border:none;">Model Name</span>
+    <input name="model_name" style="margin-bottom:10px" class="form-control" type="text" placeholder="Enter model name">
+    <input type="submit" class="btn btn-primary" style="width:120px;height: 40px; background-color:maroon; border:none;" value="Make Model" />
+  </div>
 </form>
+
 
 {% if model_list %}
 <table class="table" style="color: white;">
